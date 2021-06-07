@@ -20,6 +20,19 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <TextView
+        android:id="@+id/tv_no_movie_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:visibility="gone"
+        tools:text="@string/title"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
     <ProgressBar
         android:id="@+id/progress_bar"
         style="?android:attr/progressBarStyle"
