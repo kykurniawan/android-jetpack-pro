@@ -23,7 +23,7 @@
         <ImageView
             android:id="@+id/img_poster"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="280dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:scaleType="centerCrop"

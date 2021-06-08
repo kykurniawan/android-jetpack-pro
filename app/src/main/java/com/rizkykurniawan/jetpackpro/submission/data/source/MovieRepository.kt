@@ -6,7 +6,8 @@ import com.rizkykurniawan.jetpackpro.submission.data.source.local.entity.MovieEn
 import com.rizkykurniawan.jetpackpro.submission.data.source.remote.RemoteDataSource
 import com.rizkykurniawan.jetpackpro.submission.data.source.remote.response.MovieResponse
 
-class MovieRepository private constructor(private val remoteDataSource: RemoteDataSource): MovieDataSource {
+class MovieRepository private constructor(private val remoteDataSource: RemoteDataSource) :
+    MovieDataSource {
 
     companion object {
         @Volatile
@@ -20,7 +21,7 @@ class MovieRepository private constructor(private val remoteDataSource: RemoteDa
 
     override fun getAllMovies(): LiveData<List<MovieEntity>> {
         val movieResults = MutableLiveData<List<MovieEntity>>()
-        remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMoviesCallBack{
+        remoteDataSource.getAllMovies(object : RemoteDataSource.LoadMoviesCallBack {
             override fun onAllMoviesReceived(movieResponses: List<MovieResponse>) {
                 val movieList = ArrayList<MovieEntity>()
                 for (response in movieResponses) {
@@ -43,7 +44,7 @@ class MovieRepository private constructor(private val remoteDataSource: RemoteDa
 
     override fun getDetailMovie(movieId: String?): LiveData<MovieEntity?> {
         val movieResult = MutableLiveData<MovieEntity?>()
-        remoteDataSource.getDetailMovie(movieId, object : RemoteDataSource.LoadMovieCallBack{
+        remoteDataSource.getDetailMovie(movieId, object : RemoteDataSource.LoadMovieCallBack {
             override fun onMovieReceived(movieResponse: MovieResponse?) {
                 if (movieResponse != null) {
                     movieResult.postValue(

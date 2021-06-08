@@ -33,13 +33,7 @@
             android:label="@string/title_activity_movie_detail"
             android:parentActivityName="com.rizkykurniawan.jetpackpro.submission.ui.home.HomeActivity"
             android:theme="@style/Theme.Submission1" />
-        <activity android:name="com.rizkykurniawan.jetpackpro.submission.ui.home.HomeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="com.rizkykurniawan.jetpackpro.submission.ui.home.HomeActivity" />
     </application>
 
 </manifest>

@@ -1,7 +1,9 @@
 package com.rizkykurniawan.jetpackpro.submission.ui.home
 
 import androidx.recyclerview.widget.RecyclerView
+import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.IdlingRegistry
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.swipeUp
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -10,17 +12,29 @@ import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import com.rizkykurniawan.jetpackpro.submission.R
 import com.rizkykurniawan.jetpackpro.submission.utils.DummyData
+import com.rizkykurniawan.jetpackpro.submission.utils.EspressoIdlingResource
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
 class HomeActivityTest {
-
     private val dummyMovie = DummyData.generateDummyMovies()
     private val dummyTvShow = DummyData.generateDummyTVShows()
 
-
     @get:Rule
     val activityRule = ActivityScenarioRule(HomeActivity::class.java)
+
+    @Before
+    fun setUp() {
+        ActivityScenario.launch(HomeActivity::class.java)
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idlingResource)
+    }
 
     @Test
     fun loadMovie() {

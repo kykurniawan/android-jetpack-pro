@@ -9,11 +9,13 @@ import com.rizkykurniawan.jetpackpro.submission.utils.JsonHelper
 object Injection {
     fun provideMovieRepository(context: Context): MovieRepository {
         val remoteDataSource = RemoteDataSource.getInstance(JsonHelper(context))
+
         return MovieRepository.getInstance(remoteDataSource)
     }
 
     fun provideTVShowRepository(context: Context): TVShowRepository {
-        val remoteDataSource= RemoteDataSource.getInstance(JsonHelper(context))
-        return  TVShowRepository.getInstance(remoteDataSource)
+        val remoteDataSource = RemoteDataSource.getInstance(JsonHelper(context))
+
+        return TVShowRepository.getInstance(remoteDataSource)
     }
 }

@@ -11,7 +11,7 @@ import com.rizkykurniawan.jetpackpro.submission.R
 import com.rizkykurniawan.jetpackpro.submission.data.source.local.entity.MovieEntity
 import com.rizkykurniawan.jetpackpro.submission.databinding.ItemsMovieBinding
 
-class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     private var listMovies = ArrayList<MovieEntity>()
 
     fun setMovies(movies: List<MovieEntity>) {
@@ -20,7 +20,8 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
-        val itemsMovieBinding = ItemsMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemsMovieBinding =
+            ItemsMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MovieViewHolder(itemsMovieBinding)
     }
 
@@ -30,23 +31,25 @@ class MovieAdapter: RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
     override fun getItemCount(): Int = listMovies.size
 
-    class MovieViewHolder(private val binding: ItemsMovieBinding): RecyclerView.ViewHolder(binding.root) {
+    class MovieViewHolder(private val binding: ItemsMovieBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(movie: MovieEntity) {
-            with(binding){
+            with(binding) {
                 tvItemTitle.text = movie.title
                 tvItemReleaseDate.text = movie.releaseDate
-                itemView.setOnClickListener{
+                itemView.setOnClickListener {
                     Snackbar.make(this.root, movie.title, Snackbar.LENGTH_SHORT).show()
                     val intent = Intent(itemView.context, MovieDetailActivity::class.java)
                     intent.putExtra(MovieDetailActivity.EXTRA_MOVIE_ID, movie.movieId)
                     itemView.context.startActivity(intent)
                 }
                 Glide.with(itemView.context)
-                        .load(movie.posterDrawable)
-                        .apply(
-                                RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_error)
-                        )
-                        .into(imgPoster)
+                    .load(movie.posterDrawable)
+                    .apply(
+                        RequestOptions.placeholderOf(R.drawable.ic_loading)
+                            .error(R.drawable.ic_error)
+                    )
+                    .into(imgPoster)
             }
         }
     }

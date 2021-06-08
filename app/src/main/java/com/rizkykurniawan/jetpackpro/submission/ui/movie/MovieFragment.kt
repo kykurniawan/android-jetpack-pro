@@ -7,21 +7,24 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.rizkykurniawan.jetpackpro.submission.R
 import com.rizkykurniawan.jetpackpro.submission.databinding.FragmentMovieBinding
 import com.rizkykurniawan.jetpackpro.submission.viewmodel.MovieViewModelFactory
 
 class MovieFragment : Fragment() {
     private lateinit var fragmentMovieBinding: FragmentMovieBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         fragmentMovieBinding = FragmentMovieBinding.inflate(layoutInflater, container, false)
         return fragmentMovieBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if(activity != null) {
+        if (activity != null) {
 
             val factory = MovieViewModelFactory.getInstance(requireActivity())
 
@@ -41,22 +44,6 @@ class MovieFragment : Fragment() {
                 setHasFixedSize(true)
                 adapter = movieAdapter
             }
-
-//            if (movies.isEmpty()) {
-//                fragmentMovieBinding.rvMovie.visibility = View.GONE
-//                fragmentMovieBinding.tvNoMovieItem.visibility = View.VISIBLE
-//                fragmentMovieBinding.tvNoMovieItem.text = getString(R.string.no_movie_item)
-//            } else {
-//                fragmentMovieBinding.rvMovie.visibility = View.VISIBLE
-//                fragmentMovieBinding.tvNoMovieItem.visibility = View.GONE
-//                val movieAdapter = MovieAdapter()
-//                movieAdapter.setMovies(movies)
-//                with(fragmentMovieBinding.rvMovie) {
-//                    layoutManager = GridLayoutManager(context, 2)
-//                    setHasFixedSize(true)
-//                    adapter = movieAdapter
-//                }
-//            }
         }
     }
 }

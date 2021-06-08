@@ -20,8 +20,8 @@ class SplashScreenActivity : AppCompatActivity() {
         loadSplashScreen()
     }
 
-    private fun loadSplashScreen(){
-        Handler().postDelayed({
+    private fun loadSplashScreen() {
+        Handler(mainLooper).postDelayed({
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
             finish()

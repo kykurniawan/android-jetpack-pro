@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">TMDB Catalogue</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="movie">Movies</string>
     <string name="tvshow">TV Shows</string>
     <string name="title">Title</string>
@@ -11,9 +10,6 @@
     <string name="Season_">Season : %1$d</string>
     <string name="tv_show_season">Season</string>
     <string name="title_activity_t_v_show_detail">Detail TV Show</string>
-    <string name="action_settings">Settings</string>
-    <string name="no_movie_item">No Movie Item</string>
-    <string name="no_tv_show_item">No TV Show Item</string>
     <string name="tmdb">TMDB</string>
     <string name="description">Lorem ipsum dolor sit amet</string>
 </resources>

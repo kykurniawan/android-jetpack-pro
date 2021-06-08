@@ -30,16 +30,21 @@ class TVShowDetailActivity : AppCompatActivity() {
 
         tvShowDetailBinding.progressBar.visibility = View.VISIBLE
         if (tvShowId != null) {
-            tvShowViewModel.getDetailTVShow(tvShowId).observe(this, {tvShow ->
+            tvShowViewModel.getDetailTVShow(tvShowId).observe(this, { tvShow ->
                 tvShowDetailBinding.progressBar.visibility = View.GONE
                 Glide
                     .with(this)
                     .load(tvShow?.posterDrawable)
-                    .apply(RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_error))
+                    .apply(
+                        RequestOptions.placeholderOf(R.drawable.ic_loading)
+                            .error(R.drawable.ic_error)
+                    )
                     .into(tvShowDetailBinding.tvShowDetailPoster)
                 tvShowDetailBinding.tvShowDetailTitle.text = tvShow?.title
-                tvShowDetailBinding.tvShowDetailSeason.text = getString(R.string.Season_, tvShow?.season)
-                tvShowDetailBinding.tvShowDetailScore.text = getString(R.string.Score_, tvShow?.score)
+                tvShowDetailBinding.tvShowDetailSeason.text =
+                    getString(R.string.Season_, tvShow?.season)
+                tvShowDetailBinding.tvShowDetailScore.text =
+                    getString(R.string.Score_, tvShow?.score)
                 tvShowDetailBinding.tvShowDetailDescription.text = tvShow?.description
             })
         }

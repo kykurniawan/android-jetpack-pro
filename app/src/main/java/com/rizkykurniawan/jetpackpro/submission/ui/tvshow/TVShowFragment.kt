@@ -14,7 +14,11 @@ import com.rizkykurniawan.jetpackpro.submission.viewmodel.TVShowViewModelFactory
 class TVShowFragment : Fragment() {
     private lateinit var fragmentTvShowBinding: FragmentTvShowBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         fragmentTvShowBinding = FragmentTvShowBinding.inflate(layoutInflater, container, false)
         return fragmentTvShowBinding.root
     }

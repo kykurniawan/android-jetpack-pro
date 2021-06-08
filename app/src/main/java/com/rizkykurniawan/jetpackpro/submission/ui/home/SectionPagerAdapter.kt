@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.rizkykurniawan.jetpackpro.submission.ui.home
 
 import android.content.Context
@@ -9,7 +11,9 @@ import com.rizkykurniawan.jetpackpro.submission.R
 import com.rizkykurniawan.jetpackpro.submission.ui.movie.MovieFragment
 import com.rizkykurniawan.jetpackpro.submission.ui.tvshow.TVShowFragment
 
-class SectionPagerAdapter(private val mContext: Context, fm: FragmentManager): FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+@Suppress("DEPRECATION")
+class SectionPagerAdapter(private val mContext: Context, fm: FragmentManager) :
+    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     companion object {
         @StringRes
         private val TAB_TITLES = intArrayOf(R.string.movie, R.string.tvshow)
@@ -22,7 +26,8 @@ class SectionPagerAdapter(private val mContext: Context, fm: FragmentManager): F
             else -> Fragment()
         }
 
-    override fun getPageTitle(position: Int): CharSequence = mContext.resources.getString(TAB_TITLES[position])
+    override fun getPageTitle(position: Int): CharSequence =
+        mContext.resources.getString(TAB_TITLES[position])
 
     override fun getCount(): Int = TAB_TITLES.size
 }

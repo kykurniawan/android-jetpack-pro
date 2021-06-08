@@ -11,7 +11,7 @@ import com.rizkykurniawan.jetpackpro.submission.R
 import com.rizkykurniawan.jetpackpro.submission.data.source.local.entity.TVShowEntity
 import com.rizkykurniawan.jetpackpro.submission.databinding.ItemsTvShowBinding
 
-class TVShowAdapter: RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
+class TVShowAdapter : RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
     private var listTVShows = ArrayList<TVShowEntity>()
 
     fun setTVShows(tvShows: List<TVShowEntity>) {
@@ -20,7 +20,8 @@ class TVShowAdapter: RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TVShowViewHolder {
-        val itemsTvShowBinding = ItemsTvShowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val itemsTvShowBinding =
+            ItemsTvShowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TVShowViewHolder(itemsTvShowBinding)
     }
 
@@ -30,7 +31,8 @@ class TVShowAdapter: RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
 
     override fun getItemCount(): Int = listTVShows.size
 
-    class TVShowViewHolder(private val binding: ItemsTvShowBinding): RecyclerView.ViewHolder(binding.root) {
+    class TVShowViewHolder(private val binding: ItemsTvShowBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(tvShow: TVShowEntity) {
             with(binding) {
                 tvItemTitle.text = tvShow.title
@@ -42,11 +44,12 @@ class TVShowAdapter: RecyclerView.Adapter<TVShowAdapter.TVShowViewHolder>() {
                     itemView.context.startActivity(intent)
                 }
                 Glide.with(itemView.context)
-                        .load(tvShow.posterDrawable)
-                        .apply(
-                                RequestOptions.placeholderOf(R.drawable.ic_loading).error(R.drawable.ic_error)
-                        )
-                        .into(imgPoster)
+                    .load(tvShow.posterDrawable)
+                    .apply(
+                        RequestOptions.placeholderOf(R.drawable.ic_loading)
+                            .error(R.drawable.ic_error)
+                    )
+                    .into(imgPoster)
             }
         }
     }

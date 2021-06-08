@@ -6,7 +6,8 @@ import com.rizkykurniawan.jetpackpro.submission.data.source.local.entity.TVShowE
 import com.rizkykurniawan.jetpackpro.submission.data.source.remote.RemoteDataSource
 import com.rizkykurniawan.jetpackpro.submission.data.source.remote.response.TVShowResponse
 
-class TVShowRepository private constructor(private val remoteDataSource: RemoteDataSource): TVShowDataSource{
+class TVShowRepository private constructor(private val remoteDataSource: RemoteDataSource) :
+    TVShowDataSource {
 
     companion object {
         @Volatile
@@ -20,7 +21,7 @@ class TVShowRepository private constructor(private val remoteDataSource: RemoteD
 
     override fun getAllTVShows(): LiveData<List<TVShowEntity>> {
         val tvShowResults = MutableLiveData<List<TVShowEntity>>()
-        remoteDataSource.getAllTVShows(object : RemoteDataSource.LoadTVShowsCallBack{
+        remoteDataSource.getAllTVShows(object : RemoteDataSource.LoadTVShowsCallBack {
             override fun onAllTVShowsReceived(tvShowResponses: List<TVShowResponse>) {
                 val tvShowList = ArrayList<TVShowEntity>()
                 for (response in tvShowResponses) {
@@ -43,17 +44,19 @@ class TVShowRepository private constructor(private val remoteDataSource: RemoteD
 
     override fun getDetailTVShow(tvShowId: String): LiveData<TVShowEntity?> {
         val tvShowResult = MutableLiveData<TVShowEntity?>()
-        remoteDataSource.getDetailTVShow(tvShowId, object : RemoteDataSource.LoadTVShowCallBack{
+        remoteDataSource.getDetailTVShow(tvShowId, object : RemoteDataSource.LoadTVShowCallBack {
             override fun onTVShowReceived(tvShowResponse: TVShowResponse?) {
                 if (tvShowResponse != null) {
-                    tvShowResult.postValue(TVShowEntity(
-                        tvShowResponse.tvShowId,
-                        tvShowResponse.title,
-                        tvShowResponse.description,
-                        tvShowResponse.score,
-                        tvShowResponse.season,
-                        tvShowResponse.posterDrawable
-                    ))
+                    tvShowResult.postValue(
+                        TVShowEntity(
+                            tvShowResponse.tvShowId,
+                            tvShowResponse.title,
+                            tvShowResponse.description,
+                            tvShowResponse.score,
+                            tvShowResponse.season,
+                            tvShowResponse.posterDrawable
+                        )
+                    )
                 } else {
                     tvShowResult.postValue(null)
                 }
