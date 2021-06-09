@@ -1,10 +1,15 @@
 package com.rizkykurniawan.jetpackpro.submission.ui.movie
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import com.rizkykurniawan.jetpackpro.submission.data.source.MovieRepository
 import com.rizkykurniawan.jetpackpro.submission.data.source.local.entity.MovieEntity
 import com.rizkykurniawan.jetpackpro.submission.utils.DummyData
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
@@ -18,10 +23,15 @@ class MovieViewModelTest {
     private lateinit var viewModel: MovieViewModel
     private val dummyMovie = DummyData.generateDummyMovies()[0]
     private val movieId = dummyMovie.movieId
-    private val wrongMovieId = "wrongId"
 
     @Mock
     private lateinit var movieRepository: MovieRepository
+
+    @Mock
+    private lateinit var observer: Observer<List<MovieEntity>>
+
+    @get:Rule
+    var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @Before
     fun setUp() {
@@ -30,31 +40,34 @@ class MovieViewModelTest {
 
     @Test
     fun testGetMovies() {
-        `when`(movieRepository.getAllMovies()).thenReturn(DummyData.generateDummyMovies() as ArrayList<MovieEntity>)
-        val movies = viewModel.getMovies()
+        val dummyMovies = DummyData.generateDummyMovies()
+        val movies = MutableLiveData<List<MovieEntity>>()
+        movies.value = dummyMovies
+
+        `when`(movieRepository.getAllMovies()).thenReturn(movies)
+        val movieEntities = viewModel.getMovies().value
         verify(movieRepository).getAllMovies()
-        assertNotNull(movies)
-        assertEquals(10, movies.size)
+        assertNotNull(movieEntities)
+        assertEquals(10, movieEntities?.size)
+
+        viewModel.getMovies().observeForever(observer)
+        verify(observer).onChanged(dummyMovies)
     }
 
     @Test
     fun testGetDetailMovie() {
-        `when`(movieRepository.getDetailMovie(movieId)).thenReturn(dummyMovie)
-        val movie = viewModel.getDetailMovie(movieId)
-        verify(movieRepository).getDetailMovie(movieId)
-        assertNotNull(movie)
-        assertEquals(dummyMovie, movie)
-        assertEquals(dummyMovie.title, movie?.title)
-        assertEquals(dummyMovie.score, movie?.score)
-        assertEquals(dummyMovie.posterDrawable, movie?.posterDrawable)
-        assertEquals(dummyMovie.releaseDate, movie?.releaseDate)
-        assertEquals(dummyMovie.description, movie?.description)
-    }
+        val movie = MutableLiveData<MovieEntity>()
+        movie.value = dummyMovie
 
-    @Test
-    fun testGetDetailMovieWithWrongId() {
-        `when`(movieRepository.getDetailMovie(wrongMovieId)).thenReturn(null)
-        val movie = viewModel.getDetailMovie(wrongMovieId)
-       assertNull(movie)
+        `when`(movieRepository.getDetailMovie(movieId)).thenReturn(movie)
+        val movieEntity = viewModel.getDetailMovie(movieId).value as MovieEntity
+        verify(movieRepository).getDetailMovie(movieId)
+        assertNotNull(movieEntity)
+        assertEquals(dummyMovie, movieEntity)
+        assertEquals(dummyMovie.title, movieEntity.title)
+        assertEquals(dummyMovie.score, movieEntity.score)
+        assertEquals(dummyMovie.posterDrawable, movieEntity.posterDrawable)
+        assertEquals(dummyMovie.releaseDate, movieEntity.releaseDate)
+        assertEquals(dummyMovie.description, movieEntity.description)
     }
 }

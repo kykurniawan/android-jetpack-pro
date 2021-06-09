@@ -7,7 +7,8 @@ import com.rizkykurniawan.jetpackpro.submission.data.source.MovieRepository
 import com.rizkykurniawan.jetpackpro.submission.di.Injection
 import com.rizkykurniawan.jetpackpro.submission.ui.movie.MovieViewModel
 
-class MovieViewModelFactory private constructor(private val mMovieRepository: MovieRepository): ViewModelProvider.NewInstanceFactory(){
+class MovieViewModelFactory private constructor(private val mMovieRepository: MovieRepository) :
+    ViewModelProvider.NewInstanceFactory() {
 
     companion object {
         @Volatile

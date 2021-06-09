@@ -1,6 +1,5 @@
 package com.rizkykurniawan.jetpackpro.submission.utils
 
-import com.rizkykurniawan.jetpackpro.submission.R
 import com.rizkykurniawan.jetpackpro.submission.data.source.local.entity.MovieEntity
 import com.rizkykurniawan.jetpackpro.submission.data.source.local.entity.TVShowEntity
 import com.rizkykurniawan.jetpackpro.submission.data.source.remote.response.MovieResponse

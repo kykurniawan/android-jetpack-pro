@@ -45,13 +45,13 @@ class JsonHelper(private val context: Context) {
         return  list
     }
 
-    fun loadDetailMovie(movieId: String?): MovieResponse? {
+    fun loadDetailMovie(id: String?): MovieResponse? {
         try {
             val responseObject = JSONObject(parsingFileToString("MovieResponse.json").toString())
             val listArray = responseObject.getJSONArray("movies")
             for(i in 0 until listArray.length()) {
                 val movie = listArray.getJSONObject(i)
-                if (movie.getString("movieId") == movieId) {
+                if (movie.getString("movieId") == id) {
                     val movieId = movie.getString("movieId")
                     val title = movie.getString("title")
                     val description = movie.getString("description")
@@ -92,13 +92,13 @@ class JsonHelper(private val context: Context) {
         return list
     }
 
-    fun loadDetailTVShow(tvShowId: String?): TVShowResponse? {
+    fun loadDetailTVShow(id: String?): TVShowResponse? {
         try {
             val responseObject = JSONObject(parsingFileToString("TVShowResponse.json").toString())
             val listArray = responseObject.getJSONArray("tvShows")
             for(i in 0 until listArray.length()) {
                 val tvShow = listArray.getJSONObject(i)
-                if (tvShow.getString("tvShowId") == tvShowId) {
+                if (tvShow.getString("tvShowId") == id) {
                     val tvShowId = tvShow.getString("tvShowId")
                     val title = tvShow.getString("title")
                     val description = tvShow.getString("description")

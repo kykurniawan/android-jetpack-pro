@@ -43,22 +43,6 @@ class TVShowFragment : Fragment() {
                 setHasFixedSize(true)
                 adapter = tvShowAdapter
             }
-
-//            if (tvShows.isEmpty()) {
-//                fragmentTvShowBinding.rvTvShow.visibility = View.GONE
-//                fragmentTvShowBinding.tvNoTvShowItem.visibility = View.VISIBLE
-//                fragmentTvShowBinding.tvNoTvShowItem.text = getString(R.string.no_tv_show_item)
-//            } else {
-//                fragmentTvShowBinding.rvTvShow.visibility = View.VISIBLE
-//                fragmentTvShowBinding.tvNoTvShowItem.visibility = View.GONE
-//                val tvShowAdapter = TVShowAdapter()
-//                tvShowAdapter.setTVShows(tvShows)
-//                with(fragmentTvShowBinding.rvTvShow) {
-//                    layoutManager = GridLayoutManager(context, 2)
-//                    setHasFixedSize(true)
-//                    adapter = tvShowAdapter
-//                }
-//            }
         }
     }
 }
